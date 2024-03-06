@@ -1,0 +1,19 @@
+services:
+  test-backend-2:
+    build:
+      context: .
+      target: production
+    image: test-backend-2
+    container_name: test-backend-2
+    depends_on:
+      - test-backend-2-postgres
+    environment:
+      APPINSIGHTS_CLOUDROLE: test-backend-2-local
+      APPINSIGHTS_CONNECTIONSTRING: ${APPINSIGHTS_CONNECTIONSTRING}
+
+  test-backend-2-postgres:
+    image: postgres:11.4-alpine
+    environment:
+      POSTGRES_DB: test-backend-2
+      POSTGRES_PASSWORD: ppp
+      POSTGRES_USERNAME: postgres
